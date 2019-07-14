@@ -1,0 +1,69 @@
+.hide { display: none }
+
+.icon {
+  text-align: left
+}
+
+.center {
+  text-align: center
+}
+
+h2, h3, h4, h5, h6 {
+  color: blue-grey darken-3;
+  font-family: 'Montserrat', cursive;
+}
+
+.btn {
+  background-color: #0277bd;
+}
+
+.btn:hover {
+  background-color: #039be5
+}
+
+.btn:focus {
+  background-color: #0277bd;
+}
+
+.x {
+  background-color: #0277bd;
+  /* background-color: #b71c1c */
+}
+
+.x:hover {
+  background-color: #039be5
+}
+
+.x:focus {
+  background-color: #0277bd;
+}
+
+.icon {
+  color: #039be5
+}
+
+.icon:hover {
+  color: #29b6f6
+}
+
+.nav-wrapper {
+  background-color: white;
+}
+
+.generateQuoteButton {
+  background-color: #0277bd;
+}
+
+/* .vertical-center {
+  padding-top: 20px
+} */
+
+.vertical-center {
+  margin: 0px;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+

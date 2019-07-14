@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="google-signin-client_id"
+    content="48132811729-00jqao8bhb3rd2pns6jru21si1mf4gli.apps.googleusercontent.com">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+  <title>Fancy Todo</title>
+</head>
+
+<body style="background-color: #fffaf2;">
+  <nav id="navbar">
+    <div class="nav-wrapper">
+      <a class="brand-logo" style="color: black; padding-left: 20px"><h5>Fancy Todo</h5></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#" onclick="signOut();" style="color: black; padding-right: 20px">Sign out</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section id="notification" class="hide">
+      <div id="notification-content"></div>
+    </section>
+    <section id="landing-page" class="" style="padding-top: 150px">
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8" style="text-align: center">
+          <h3 style="padding-bottom: 30px">Please sign in to continue</h3>
+          <!-- form login -->
+          <form id="login-form">
+            <div class=" form-group" style="width: 300px; margin: 0 auto; padding-bottom: 15px">
+              <input id="login-email" type="text" class="form-control" placeholder="Email">
+              <input id="login-password" type="password" class="form-control" placeholder="Password">
+            </div>
+            <button id="landing-signin" type="submit" class="btn btn-primary"
+              style="margin-bottom: 20px; width: 300px;">Sign
+              in</button><br>
+          </form>
+          <small>Don't have account?</small><br>
+          <button class="x">
+            <div class="g-signin2" data-onsuccess="onSignIn" data-width="140px">SIGN UP</div>
+            <button id="landing-signup-btn" class="btn btn-primary" style="margin-top: 5px; width: 140px">Sign
+              up</button>
+          </button>
+          <!-- form login -->
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+    </section>
+
+    <section id="register-page" class="" style="padding-top: 135px"">
+    <div class=" row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8 center">
+        <a href="#"><i id="register-back-btn" class="small material-icons">arrow_back</i></a>
+        <h3 class="center" style="padding-bottom: 30px; margin-bottom: 0px">Create Account</h3>
+        <form id="register-form" class="center">
+          <div class="form-group" style="width: 300px; margin: 0 auto; padding-bottom: 15px">
+            <div class="input-field col s12" style="padding: 0px">
+              <input type="text" id="register-name" class="autocomplete">
+              <label for="autocomplete-input">Full Name</label>
+            </div>
+            <div class="input-field col s12" style="padding: 0px;">
+              <input id="register-email" type="text" class="autocomplete">
+              <label for="autocomplete-input">Email</label>
+            </div>
+            <div class="input-field col s12" style="padding: 0px">
+              <input id="register-password" type="password" class="autocomplete">
+              <label for="autocomplete-input">Password</label>
+            </div>
+          </div>
+          <button id="register-signup-btn" type="submit" class="btn btn-primary"
+            style="margin-bottom: 20px; width: 300px">Sign
+            up</button>
+        </form>
+      </div>
+      <div class="col-sm-2"></div>
+  </div>
+  </section>
+
+  </div>
+  <section id="todo-page" style="padding-left: 100px; padding-right: 100px">
+    <div id="current-time" style="text-align: center"></div>
+    <p style="text-align: center; padding-bottom: 20px"><img src="./images/wavy-line.png"></p>
+    <div class=" row">
+      <!-- <div class="col-sm-3" style="border: 1px solid black"></div> -->
+      <div class="col-sm-7">
+        <ul class="collection with-header">
+          <li class="collection-header">
+            <h5 id="todo-welcome-name"></h5>
+          </li>
+          <li class="collection-item" style="padding: 0px">
+            <nav>
+              <div class="nav-wrapper">
+                <form>
+                  <div class="input-field">
+                    <input id="todo-search" type="search" required placeholder="Search here...">
+                    <label class="label-icon" for="search"><i class="material-icons"
+                        style="color: black">search</i></label>
+                    <i class="material-icons">close</i>
+                  </div>
+                </form>
+              </div>
+            </nav>
+          </li>
+          <li class="collection-item" style="padding: 0px;">
+            <ul class="pagination">
+              <li class="waves-effect" onclick="fetchTodo()"><a href="#!"><small>All Tasks</small></a></li>_
+              <li class="waves-effect" onclick="filtering(false)"><a href="#!"><small>Incomplete Tasks</small></a></li>_
+              <li class="waves-effect" onclick="filtering(true)"><a href="#!"><small>Complete Tasks</small></a></li>
+            </ul>
+          </li>
+          <div id="todo-name"></div>
+          <li class="collection-item" style="padding: 0px"></li>
+          <li class="collection-item" style="padding: 0px; text-align: center">
+            <a href="#" onclick="randomTodo()"><small>Try random activity</small></a>
+          </li>
+          <div style="text-align: center; background-color: white; padding-top: 30px; padding-bottom: 30px">
+            <a class="btn-floating btn-large waves-effect waves-light blue" id="todo-add-btn" onclick="addTodo()"><i
+                class="material-icons">add</i></a>
+          </div>
+          <!-- Modal Structure -->
+          <div id="modal1" class="modal" style="width: 500px">
+            <div class="modal-content" id="todo-detail">
+              <h4>Modal Header</h4>
+              <p>A bunch of text</p>
+            </div>
+            <div id="modal-footer" style="text-align: center; padding-top: 35px">
+            </div>
+          </div>
+        </ul>
+      </div>
+      <div class="col-sm-5" style="text-align: center">
+        <ul class="collection with-header">
+          <li class="collection-header" style="height: 165px; max-height:250px">
+            <h6 id="quoteText" class="vertical-center" style="font-style: italic"></h6><br>
+            <!-- <h6 id="quoteAuthor"></h6> -->
+          </li>
+          <li class="collection-item">
+            <!-- <h6 id="quoteText" class="vertical-center" style="font-style: italic"></h6><br> -->
+            <h6 id="quoteAuthor" style="margin: 0px"></h6>
+          </li>
+        </ul>
+        <button id="generateQuoteButton" class="btn waves-effect waves-light blue" type="submit">Inspire
+          me!</button>
+      </div>
+    </div>
+  </section>
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+  integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+</html>
